@@ -1,5 +1,5 @@
 """
-ASGI config for DAXimilian project.
+ASGI config for PyDAXWeb project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.asgi import get_asgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'DAXimilian.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'PyDAXWeb.settings')
 
 application = get_asgi_application()
