@@ -8,6 +8,7 @@ from .models import DAXExpressionModel
 def home_view(request):
     result_clean = None
     result_comments = None
+    result_html = None
 
     if request.method == 'POST':
         form = DAXForm(request.POST)
@@ -26,13 +27,21 @@ def home_view(request):
                 result_comments = expression.comments  
 
             elif 'remove_comments' in request.POST:
-                result_clean = expression.dax_expression_no_comments
+                new_expression_str = expression.dax_expression_no_comments
+                new_expression = DAXExpression(new_expression_str)
+                result_clean = new_expression.generate_html(light=True)
+                
+            elif 'Format' in request.POST:
+                result_html=expression.generate_html(light=True)
+                
+                
     else:
         form = DAXForm()
 
     context = {
         'form': form,
         'result_clean': result_clean,
-        'result_comments': result_comments
+        'result_comments': result_comments,
+        'result_html': result_html,
     }
     return render(request, 'home.html', context)
